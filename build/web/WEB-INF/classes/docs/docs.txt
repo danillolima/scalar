@@ -1,0 +1,10 @@
+paths 
+- /scalar/entrar
+- /scalar/cadastro
+- /profile/user: Pagina com artigos, imagens, videos do usuário
+- /buscar: Recebe os Parametros get da busca em conteúdos públicados
+
+
+Entidades: post
+           user
+           
