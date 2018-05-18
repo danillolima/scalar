@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Aluno
  */
-@WebFilter(filterName = "Auth", urlPatterns = {"/publicar", "/profile"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+@WebFilter(filterName = "Auth", urlPatterns = {"/publicar", "/profile", "/publicar.jsp", "/profile.jsp"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class Auth implements Filter {
     private HttpSession usuarioIsLogged = null;
     private static final boolean debug = true;
@@ -43,14 +43,7 @@ public class Auth implements Filter {
         if (debug) {
             log("Auth:DoBeforeProcessing");
         }
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-        //if(usuarioIsLogged){
-        usuarioIsLogged = req.getSession();
-        //}
-        //else{
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-       // }
+       
         
         // Write code here to process the request and/or response before
         // the rest of the filter chain is invoked.
@@ -118,9 +111,18 @@ public class Auth implements Filter {
         
         doBeforeProcessing(request, response);
         
+            
         Throwable problem = null;
         try {
-            chain.doFilter(request, response);
+            HttpServletRequest req = (HttpServletRequest) request;
+            HttpServletResponse resp = (HttpServletResponse) response;
+            usuarioIsLogged = req.getSession();
+            if(usuarioIsLogged.getAttribute("logado") != null){
+                chain.doFilter(request, response);
+            }
+            else{
+                request.getRequestDispatcher("login").forward(request, response);
+            }
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then

@@ -1,3 +1,5 @@
+package controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,6 +8,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +20,8 @@ import libs.ConMySQL;
  *
  * @author Aluno
  */
-@WebServlet(urlPatterns = {"/login/verifica"})
-public class Verifica extends HttpServlet {
+@WebServlet(urlPatterns = {"/user"})
+public class UsuarioController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,11 +36,8 @@ public class Verifica extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        PrintWriter out = response.getWriter();
-        String email = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        ConMySQL conecta = new ConMySQL();
-        conecta.
+        
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,11 +53,17 @@ public class Verifica extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        if(request.getParameter("logout").equals("1")){
+            request.getSession().invalidate();
+            response.sendRedirect("login");
+        }
+        
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
+     *https://stackoverflow.com/questions/13274279/authentication-filter-and-servlet-for-login?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -66,7 +72,40 @@ public class Verifica extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        PrintWriter out = response.getWriter();
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        PreparedStatement p;
+        ResultSet r;
+        Connection c;
+        String m;
+        try{
+            c = ConMySQL.conecta();
+            p = c.prepareStatement("SELECT * FROM users where user = ? AND pass = ?");
+            p.setString(1, user);
+            p.setString(2, pass);
+            r = p.executeQuery();
+            if(r.next()){       
+                request.getSession().setAttribute("logado", true);
+                request.getSession().setAttribute("user", r.getString("user"));
+                response.sendRedirect("/scalar/publicar");
+            }
+            else{
+                m = "Usuario ou senha estão incorretos.";
+                response.sendRedirect("/scalar/login");
+            }
+        }catch(SQLException e){
+           e.printStackTrace();
+        }
+        
+        
         processRequest(request, response);
+        
+        
+        
+        
+        
     }
 
     /**

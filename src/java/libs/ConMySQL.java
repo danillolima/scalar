@@ -10,17 +10,26 @@ import java.sql.*;
  * @author Danillo Lima
  */
 public class ConMySQL {
-    public static boolean conexa(){
-        boolean t;
+    public static Connection conecta(){
+        Connection c = null; 
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql:/ /localhost:3306/scalar","root","root");
-            t = true; 
-        }catch(Exception e){
+            String driverName = "com.mysql.jdbc.Driver";                        
+            Class.forName(driverName);
+            String serverName = "localhost";    
+            String mydatabase = "scalar";     
+            String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
+            String username = "root";       
+            String password = "root";      
+            c = DriverManager.getConnection(url, username, password);
+        }catch(SQLException e){
             e.printStackTrace();
-            t = false; 
         }
-        return t;
+        catch(ClassNotFoundException e){
+        
+        }
+        
+ 
+        return c;
     }
     
 }

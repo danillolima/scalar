@@ -1,4 +1,6 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:layout title="Publicar posts!">
- Página de profile
+    
+    <h1> Olá, ${sessionScope.user} </h1>
+
 </t:layout>

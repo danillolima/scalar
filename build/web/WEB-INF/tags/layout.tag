@@ -6,18 +6,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/site.css">
-    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="/scalar/css/site.css">
+    <link rel="icon" href="/scalar/img/icon.png">
     <title>${title}</title>
 </head>
 <body>
     <header>
        
-        <div class="logo"> <a href="/scalar"><img src="img/logo.png"/></a></div>
+        <div class="logo"> <a href="/scalar"><img src="/scalar/img/logo.png"/></a></div>
         <nav>
-            <a href="/scalar/">INICIO</a>
-            <a href="login.jsp">PUBLICAR</a>
-            <a href="cadastro.jsp">CADASTRAR</a>
+            <a href="/scalar">INICIO</a>
+            <a href="/scalar/publicar">PUBLICAR</a>
+            <%  HttpServletRequest r = (HttpServletRequest)request;
+                HttpSession sessionUser = r.getSession();
+                if(sessionUser.getAttribute("logado") != null){
+                    out.print(" <a href=\"/scalar/profile\">MEU PERFIL</a> ");
+                    out.print(" <a href=\"/scalar/user?logout=1\">SAIR</a> ");
+                }
+                else{
+                    out.print(" <a href=\"/scalar/login\">ENTRAR</a> ");
+                    out.print(" <a href=\"/scalar/cadastro\">CADASTRAR</a>");
+                }
+            %>
         </nav>
         <div>
             <label class="botao"></label>

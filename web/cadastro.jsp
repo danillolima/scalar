@@ -7,7 +7,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <t:layout title="Cadastro - Scalar">
  <div class="form-box">
-            <h1/>Cadastro</h1>
+            <h1>Cadastro</h1>
             <form name="cadastro" action="verifica.jsp" method="POST">
                 <ul>
                     <li><label>Usuário: <input type="text" name="user" size="10" /> </label></li>
