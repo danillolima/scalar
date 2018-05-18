@@ -22,14 +22,10 @@ create or replace table posts(
     idPost int auto_increment primary key,
     title varchar(100),
     content text(1000),
+    url varchar(150);
+    img varchar(150);
+
     idUser int,
     foreign key(idUser) references users(idUser)
 );
 
-create or replace table medias(
-    idMedia int auto_increment primary key,
-    typeMedia int,
-    url varchar(120),
-    idUser int,
-    foreign key(idUser) references users(idUser)
-);

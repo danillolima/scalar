@@ -8,3 +8,33 @@ paths
 Entidades: post
            user
            
+
+links:
+https://stackoverflow.com/questions/6048102/how-to-message-from-servlet-and-display-in-jsp?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+https://stackoverflow.com/questions/5935892/if-else-within-jsp-or-jstl?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+https://stackoverflow.com/questions/38170116/jsp-giving-nullpointerexception-for-request-getparameter?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+https://stackoverflow.com/questions/13274279/authentication-filter-and-servlet-for-login?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Onde é pra fazer as busca?
+
+Pagina principal
+

@@ -13,7 +13,7 @@
                     ${sessionScope.message}
                     <li><label>Usuário: <input type="text" name="user" size="10" /> </label></li>
                     <li><label>Senha:   <input type="password" name="pass" value=""  /></label></li>
-                    <li><label>Email:   <input type="password" name="mail" value=""  /></label></li>
+                    <li><label>Email:   <input type="text" name="mail" value=""  /></label></li>
                     <li><label>Endereço:   <input type="text" name="adress" value=""  /></label></li>
                     <li><label><input class="send" type="submit" value="Cadatrar" /></label></li></ul>
             </form>

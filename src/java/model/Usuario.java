@@ -16,6 +16,13 @@ import libs.ConMySQL;
 public class Usuario {
 
     private int id;
+
+    public Usuario(String user, String email, String senha, String endereco) {
+        this.user = user;
+        this.email = email;
+        this.senha = senha;
+        this.endereco = endereco;
+    }
     private String user;
     private String email;
     private String senha;
@@ -99,7 +106,7 @@ public class Usuario {
             p.setString(2, newUser.getEmail());
             p.setString(3, newUser.getSenha());
             p.setString(4, newUser.getEndereco());
-            p.executeQuery();
+            p.executeUpdate();
         }catch(SQLException e){
             
         }
