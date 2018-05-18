@@ -11,7 +11,7 @@
 create database scalar;
 use scalar;
 create or replace table users(
-    idUser int auto_increment primary key,
+    idUser varchar(36) primary key default uuid(),
     user varchar(50) unique,
     email varchar(100) unique,
     pass varchar(100),

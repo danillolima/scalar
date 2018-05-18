@@ -27,8 +27,6 @@ public class ConMySQL {
         catch(ClassNotFoundException e){
         
         }
-        
- 
         return c;
     }
     

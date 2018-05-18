@@ -87,4 +87,22 @@ public class Usuario {
         }
         return userFound;
     }
+    
+    public static Usuario saveUsuario(Usuario newUser){
+        Connection c;
+        c = ConMySQL.conecta();
+        PreparedStatement p;
+        ResultSet r;
+          try{
+            p = c.prepareStatement("insert into users values (default, ?, ?, ?, ?) ");
+            p.setString(1, newUser.getUser());
+            p.setString(2, newUser.getEmail());
+            p.setString(3, newUser.getSenha());
+            p.setString(4, newUser.getEndereco());
+            p.executeQuery();
+        }catch(SQLException e){
+            
+        }
+        return null;
+    }
 }

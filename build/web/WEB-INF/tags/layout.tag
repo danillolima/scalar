@@ -12,16 +12,16 @@
 </head>
 <body>
     <header>
-       
         <div class="logo"> <a href="/scalar"><img src="/scalar/img/logo.png"/></a></div>
         <nav>
             <a href="/scalar">INICIO</a>
             <a href="/scalar/publicar">PUBLICAR</a>
-            <%  HttpServletRequest r = (HttpServletRequest)request;
+            <%  
+                HttpServletRequest r = (HttpServletRequest)request;
                 HttpSession sessionUser = r.getSession();
                 if(sessionUser.getAttribute("logado") != null){
                     out.print(" <a href=\"/scalar/profile\">MEU PERFIL</a> ");
-                    out.print(" <a href=\"/scalar/user?logout=1\">SAIR</a> ");
+                    out.print(" <a href=\"/scalar/user?action=1\">SAIR</a> ");
                 }
                 else{
                     out.print(" <a href=\"/scalar/login\">ENTRAR</a> ");
@@ -31,8 +31,7 @@
         </nav>
         <div>
             <label class="botao"></label>
-        </div>
-        
+        </div>      
     </header>
     <div class="container">
         <jsp:doBody/>
