@@ -36,6 +36,11 @@ public class UsuarioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            //out.println(getServletContext().getInitParameter("upload.location"));
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,7 +92,7 @@ public class UsuarioController extends HttpServlet {
             else
                 msg = msg + "<li>Senha vazia</li>";
                         
-            if(request.getParameter("pass") != null  && request.getParameter("pass").equals("") == false)
+            if(request.getParameter("mail") != null  && request.getParameter("mail").equals("") == false)
                 mail = request.getParameter("mail");
             else
                 msg = msg + "<li>E-mail vazio</li>";

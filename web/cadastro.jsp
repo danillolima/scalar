@@ -11,6 +11,7 @@
             <form name="cadastro" action="/scalar/user?action=2" method="POST">
                 <ul>
                     ${sessionScope.message}
+                   
                     <li><label>Usuário: <input type="text" name="user" size="10" /> </label></li>
                     <li><label>Senha:   <input type="password" name="pass" value=""  /></label></li>
                     <li><label>Email:   <input type="text" name="mail" value=""  /></label></li>

@@ -20,12 +20,12 @@ create or replace table users(
 
 create or replace table posts(
     idPost int auto_increment primary key,
+    hora timestamp default current_timestamp,
     title varchar(100),
     content text(1000),
-    url varchar(150);
-    img varchar(150);
-
-    idUser int,
+    video varchar(150),
+    img varchar(150),
+    idUser varchar(36),
     foreign key(idUser) references users(idUser)
 );
 

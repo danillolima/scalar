@@ -6,19 +6,26 @@ package controller;
  * and open the template in the editor.
  */
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Danillo Lima
  */
 @WebServlet(urlPatterns = {"/post"})
+@MultipartConfig
 public class PostController extends HttpServlet {
 
     /**
@@ -73,6 +80,45 @@ public class PostController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Part video = null, img = null;
+        String title = null, content = null, msg = "", webImgPath, webVideoPath, name = "";
+        File videoS, imgS, imgFolder, videoFolder;
+
+        if(request.getParameter("action").equals("save")){            
+            imgFolder = new File("C:\\Users\\Danillo Lima\\Documents\\NetBeansProjects\\scalar\\web\\uploads\\imagens");
+            videoFolder  = new File("C:\\Users\\Danillo Lima\\Documents\\NetBeansProjects\\scalar\\web\\uploads\\videos");
+            webImgPath = "/scalar/uploads/imagens/"; 
+            webVideoPath = "/scalar/uploads/videos/";
+            if(request.getParameter("title") != null && request.getParameter("title").equals("") == false){
+                title = request.getParameter(title);
+            } 
+             
+            if(request.getParameter("content") != null && request.getParameter("content").equals("") == false){
+                content = request.getParameter("content");  
+            }
+           
+           
+            img = request.getPart("img");
+            if(img.getSize() != 0){
+                name = UUID.randomUUID().toString() + "-" + img.getSubmittedFileName();
+                imgS = new File(imgFolder, name);
+                try (InputStream input = img.getInputStream()) {
+                   Files.copy(input, imgS.toPath());
+                }
+            }
+            
+            video = request.getPart("video");
+
+            if(video.getSize() != 0){
+                name = UUID.randomUUID().toString() + "-" + video.getSubmittedFileName();
+                videoS = new File(videoFolder, name);
+                try (InputStream input = video.getInputStream()) {
+                   Files.copy(input, videoS.toPath());
+                }
+            }
+        }
+           
         processRequest(request, response);
     }
 

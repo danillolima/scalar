@@ -95,7 +95,7 @@ public class Usuario {
         return userFound;
     }
     
-    public static Usuario saveUsuario(Usuario newUser){
+    public static void saveUsuario(Usuario newUser){
         Connection c;
         c = ConMySQL.conecta();
         PreparedStatement p;
@@ -110,6 +110,5 @@ public class Usuario {
         }catch(SQLException e){
             
         }
-        return null;
     }
 }
