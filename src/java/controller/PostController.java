@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import model.Post;
 
 /**
  *
@@ -84,14 +85,15 @@ public class PostController extends HttpServlet {
         Part video = null, img = null;
         String title = null, content = null, msg = "", webImgPath, webVideoPath, name = "";
         File videoS, imgS, imgFolder, videoFolder;
+        webImgPath = "/scalar/uploads/imagens/"; 
+        webVideoPath = "/scalar/uploads/videos/";
 
         if(request.getParameter("action").equals("save")){            
             imgFolder = new File("C:\\Users\\Danillo Lima\\Documents\\NetBeansProjects\\scalar\\web\\uploads\\imagens");
             videoFolder  = new File("C:\\Users\\Danillo Lima\\Documents\\NetBeansProjects\\scalar\\web\\uploads\\videos");
-            webImgPath = "/scalar/uploads/imagens/"; 
-            webVideoPath = "/scalar/uploads/videos/";
+            
             if(request.getParameter("title") != null && request.getParameter("title").equals("") == false){
-                title = request.getParameter(title);
+                title = request.getParameter("title");
             } 
              
             if(request.getParameter("content") != null && request.getParameter("content").equals("") == false){
@@ -106,7 +108,10 @@ public class PostController extends HttpServlet {
                 try (InputStream input = img.getInputStream()) {
                    Files.copy(input, imgS.toPath());
                 }
+                webImgPath = webImgPath + name;
             }
+            else
+                webImgPath = null;
             
             video = request.getPart("video");
 
@@ -116,9 +121,12 @@ public class PostController extends HttpServlet {
                 try (InputStream input = video.getInputStream()) {
                    Files.copy(input, videoS.toPath());
                 }
+                webVideoPath = webVideoPath + name;
             }
+            else 
+                webVideoPath = null;
         }
-           
+        Post.savePost(new Post(title, request.getSession().getAttribute("idUser").toString(), content, webImgPath, webVideoPath ));
         processRequest(request, response);
     }
 

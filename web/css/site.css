@@ -67,8 +67,8 @@ header > a >svg{
     color: rgb(255, 90, 85);
 }
 
-.form-box{
-    width: 50%;
+.form-box, .profile{
+    width: 75%;
     margin: 0 auto;
 }
 .form-box ul{

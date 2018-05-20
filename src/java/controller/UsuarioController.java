@@ -127,7 +127,9 @@ public class UsuarioController extends HttpServlet {
             r = p.executeQuery();
             if(r.next()){       
                 request.getSession().setAttribute("logado", true);
+                request.getSession().setAttribute("idUser", r.getString("idUser"));
                 request.getSession().setAttribute("user", r.getString("user"));
+                
                 response.sendRedirect("/scalar/publicar");
             }
             else{

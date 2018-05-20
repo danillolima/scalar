@@ -1,5 +1,7 @@
 package model;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import libs.ConMySQL;
 
 /*
@@ -15,13 +17,24 @@ import libs.ConMySQL;
 
 public class Post {
     
-    private int id;
+     private int id;
     private String title;
     private String publish_by;
     private String content;
     private String img;
     private String video;
     private String hora;
+    
+    public Post(int id, String title, String publish_by, String content, String img, String video, String hora) {
+        this.id = id;
+        this.title = title;
+        this.publish_by = publish_by;
+        this.content = content;
+        this.img = img;
+        this.video = video;
+        this.hora = hora;
+    }
+ 
    
     public Post(String title, String publish_by, String content, String img, String video) {
         this.title = title;
@@ -101,5 +114,38 @@ public class Post {
         }catch(SQLException e){
             
         }
+    }
+    public static ArrayList<Post> getPosts(int indice, int qtd, String author){
+        Connection c;
+        c = ConMySQL.conecta();
+        PreparedStatement p;
+        ResultSet r;
+        int i = 0, j = 0;
+        ArrayList<Post> postsFound = new ArrayList<>();
+        try{
+            p = c.prepareStatement("select * from posts where idUser = ?");
+            p.setString(1, author);
+            r = p.executeQuery();
+ //int id, String title, String publish_by, String content, String img, String video, String hora) {
+                  
+            while(r.next()){
+                if(i >= indice){
+                    if(j < qtd){
+                        postsFound.add( new Post( r.getInt("idPost"),
+                                                  r.getString("title"),
+                                                  r.getString("idUser"),
+                                                  r.getString("content"),
+                                                  r.getString("img"),
+                                                  r.getString("video"),
+                                                  r.getString("hora")));
+                        j++;
+                    }
+                }
+                i++;
+            }
+        }catch(SQLException e){
+            
+        }
+        return postsFound;
     }
 }
