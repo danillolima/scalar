@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,7 +26,7 @@ import model.Post;
  *
  * @author Danillo Lima
  */
-@WebServlet(urlPatterns = {"/post"})
+@WebServlet(urlPatterns = {"/posts"})
 @MultipartConfig
 public class PostController extends HttpServlet {
 
@@ -40,19 +41,11 @@ public class PostController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PostController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PostController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        response.setContentType("text/html;charset=UTF-8");      
+        ArrayList<Post> indexUser;
+        indexUser = Post.getPosts(0, 10, request.getSession().getAttribute("idUser").toString());
+        request.setAttribute("posts", indexUser);
+        request.getRequestDispatcher("/profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -99,8 +92,7 @@ public class PostController extends HttpServlet {
             if(request.getParameter("content") != null && request.getParameter("content").equals("") == false){
                 content = request.getParameter("content");  
             }
-           
-           
+            
             img = request.getPart("img");
             if(img.getSize() != 0){
                 name = UUID.randomUUID().toString() + "-" + img.getSubmittedFileName();
@@ -126,8 +118,14 @@ public class PostController extends HttpServlet {
             else 
                 webVideoPath = null;
         }
-        Post.savePost(new Post(title, request.getSession().getAttribute("idUser").toString(), content, webImgPath, webVideoPath ));
+        if(webVideoPath == null && webImgPath == null && content == null && title == null){
+            request.getRequestDispatcher("/publicar").forward(request, response);
+            
+        }
+        else
+            Post.savePost(new Post(title, request.getSession().getAttribute("idUser").toString(), content, webImgPath, webVideoPath ));
         processRequest(request, response);
+        request.getRequestDispatcher("/posts").forward(request, response);
     }
 
     /**

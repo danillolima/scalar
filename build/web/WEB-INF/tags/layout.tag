@@ -20,8 +20,8 @@
                 HttpServletRequest r = (HttpServletRequest)request;
                 HttpSession sessionUser = r.getSession();
                 if(sessionUser.getAttribute("logado") != null){
-                    out.print(" <a href=\"/scalar/profile\">MEU PERFIL</a> ");
-                    out.print(" <a href=\"/scalar/user?action=1\">SAIR</a> ");
+                    out.print(" <a href=\"/scalar/posts\">MEU PERFIL</a> ");
+                    out.print(" <a href=\"/scalar/user?action=logout\">SAIR</a> ");
                 }
                 else{
                     out.print(" <a href=\"/scalar/login\">ENTRAR</a> ");

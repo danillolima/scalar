@@ -82,7 +82,13 @@ header > a >svg{
   display: flex;
   flex-direction: column;
 }
-
+.post{
+    width: 400px;
+}
+.post img{
+    display: block;
+    width: 400px;
+}
 .camera > h1 {
     width: 30%;
     color: white;

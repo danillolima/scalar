@@ -13,11 +13,11 @@ import libs.ConMySQL;
  *
  * @author Aluno
  */
-public class Usuario {
+public class User {
 
     private int id;
 
-    public Usuario(String user, String email, String senha, String endereco) {
+    public User(String user, String email, String senha, String endereco) {
         this.user = user;
         this.email = email;
         this.senha = senha;
@@ -28,7 +28,7 @@ public class Usuario {
     private String senha;
     private String endereco;
    
-    public Usuario() {
+    public User() {
        user = null;
     }
     
@@ -71,18 +71,18 @@ public class Usuario {
         this.id = id;
     }
     
-    public static Usuario getUsuario(String user){
+    public static User getUsuario(String user){
         Connection c;
         c = ConMySQL.conecta();
         PreparedStatement p;
         ResultSet r;
-        Usuario userFound = null;
+        User userFound = null;
         try{
             p = c.prepareStatement("select * from users where user = ?");
             p.setString(1, user);
             r = p.executeQuery();
             if(r.next()){
-                userFound = new Usuario();
+                userFound = new User();
                 userFound.setId(r.getInt("idUser"));
                 userFound.setSenha(r.getString("pass"));
                 userFound.setEmail(r.getString("email"));
@@ -95,7 +95,7 @@ public class Usuario {
         return userFound;
     }
     
-    public static void saveUsuario(Usuario newUser){
+    public static void saveUsuario(User newUser){
         Connection c;
         c = ConMySQL.conecta();
         PreparedStatement p;

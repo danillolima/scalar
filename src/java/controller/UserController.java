@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import libs.ConMySQL;
-import model.Usuario;
+import model.User;
 
 /**
  *
  * @author Aluno
  */
 @WebServlet(urlPatterns = {"/user"})
-public class UsuarioController extends HttpServlet {
+public class UserController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,7 +56,7 @@ public class UsuarioController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if(request.getParameter("action") != null){
-            if(request.getParameter("action").equals("1")){
+            if(request.getParameter("action").equals("logout")){
                 request.getSession().invalidate();
                 response.sendRedirect("login");
             }
@@ -75,11 +75,11 @@ public class UsuarioController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-        String msg = "";
         
-        if(request.getParameter("action").equals("2")){
-           
-            Usuario newUser = new Usuario(); 
+        
+        if(request.getParameter("action").equals("save")){
+           String msg = "";
+            User newUser = new User(); 
             String user = null, pass = null, mail = null, adress = null;
             if(request.getParameter("user")!= null && request.getParameter("user").equals("") == false)
                 user = request.getParameter("user");
@@ -92,8 +92,9 @@ public class UsuarioController extends HttpServlet {
             else
                 msg = msg + "<li>Senha vazia</li>";
                         
-            if(request.getParameter("mail") != null  && request.getParameter("mail").equals("") == false)
+            if(request.getParameter("mail") != null  && request.getParameter("mail").equals("") == false){
                 mail = request.getParameter("mail");
+            }
             else
                 msg = msg + "<li>E-mail vazio</li>";
             
@@ -101,16 +102,19 @@ public class UsuarioController extends HttpServlet {
                 adress = request.getParameter("adress");
             }
             if(!msg.equals("")){
-                request.getSession().setAttribute("message", msg);
-                response.sendRedirect("cadastro");
-                //request.getRequestDispatcher("/scalar/cadastro").forward(request, response);
+               // request.getSession().setAttribute("message", msg);
+            //    response.sendRedirect("cadastro");
+                request.setAttribute("message", msg);
+                
+                request.getRequestDispatcher("/cadastro").forward(request, response);
+                
             }
             else{
-                Usuario.saveUsuario(new Usuario(user, mail,  pass, adress));
+                User.saveUsuario(new User(user, mail,  pass, adress));
                 response.sendRedirect("login");
             }
         }
-        if(request.getParameter("action").equals("3")){
+        if(request.getParameter("action").equals("verify")){
         
         PrintWriter out = response.getWriter();
         String user = request.getParameter("user");
@@ -129,7 +133,6 @@ public class UsuarioController extends HttpServlet {
                 request.getSession().setAttribute("logado", true);
                 request.getSession().setAttribute("idUser", r.getString("idUser"));
                 request.getSession().setAttribute("user", r.getString("user"));
-                
                 response.sendRedirect("/scalar/publicar");
             }
             else{

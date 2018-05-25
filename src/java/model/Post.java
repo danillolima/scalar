@@ -123,7 +123,7 @@ public class Post {
         int i = 0, j = 0;
         ArrayList<Post> postsFound = new ArrayList<>();
         try{
-            p = c.prepareStatement("select * from posts where idUser = ?");
+            p = c.prepareStatement("select * from posts where idUser = ? order by hora desc ");
             p.setString(1, author);
             r = p.executeQuery();
  //int id, String title, String publish_by, String content, String img, String video, String hora) {

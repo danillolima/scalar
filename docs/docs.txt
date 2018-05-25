@@ -1,8 +1,10 @@
 paths 
-- /scalar/entrar
+- /scalar/login
 - /scalar/cadastro
-- /profile/user: Pagina com artigos, imagens, videos do usuário
-- /buscar: Recebe os Parametros get da busca em conteúdos públicados
+- /post: Pagina com posts do usuário[Restrita]
+- /publicar: página para fazer posts[restrita]
+
+- /post?buscar=XXX: Recebe os Parametros get da busca em conteúdos públicados
 
 
 Entidades: post
@@ -14,7 +16,10 @@ https://stackoverflow.com/questions/6048102/how-to-message-from-servlet-and-disp
 https://stackoverflow.com/questions/5935892/if-else-within-jsp-or-jstl?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 https://stackoverflow.com/questions/38170116/jsp-giving-nullpointerexception-for-request-getparameter?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 https://stackoverflow.com/questions/13274279/authentication-filter-and-servlet-for-login?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-
+https://stackoverflow.com/questions/4342518/jsp-can-it-work-similar-to-yield-layout-content-for-in-ruby-rails-erb?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+http://www.onjava.com/pub/a/onjava/excerpt/jserverpages3_ch11/index.html
+https://github.com/web-2-utfpr/instaclone/pull/54/files/eb4b26e4d7a7c169d59ff0e71adfa14c39d8d785
+https://www.caelum.com.br/apostila-java-web/recursos-importantes-filtros/#exerccios-opcionais-filtro-para-medir-o-tempo-de-execuo
 
 
 
