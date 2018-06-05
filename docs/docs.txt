@@ -1,11 +1,12 @@
 paths 
 - /scalar/login
 - /scalar/cadastro
-- /post: Pagina com posts do usuário[Restrita]
+- /posts: Pagina com posts do usuário[Restrita]
 - /publicar: página para fazer posts[restrita]
 
-- /post?buscar=XXX: Recebe os Parametros get da busca em conteúdos públicados
-
+- /posts?buscar=XXX: Recebe os Parametros get da busca em conteúdos públicados
+- /posts?action=save
+- /
 
 Entidades: post
            user

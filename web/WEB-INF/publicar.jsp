@@ -10,5 +10,5 @@
                     <li><label>Imagem(opcional): <input type="file" name="img" size="10" /></li>
                     <li><label>Vídeo(opcional): <input type="file" name="video" size="10" /></li>
                     <li><label><input class="send" type="submit" value="Publicar" /></label></li></ul>
-            </form>
+            </form></div>
 </t:layout>

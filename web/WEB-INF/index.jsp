@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 15/05/2018, 16:54:37
-    Author     : Aluno
---%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <t:layout title="Pagina Inicial - Scalar">

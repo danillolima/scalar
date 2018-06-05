@@ -2,20 +2,13 @@ package model;
 import java.sql.*;
 import libs.ConMySQL;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 /**
  *
  * @author Aluno
  */
 public class User {
 
-    private int id;
+    private String id;
 
     public User(String user, String email, String senha, String endereco) {
         this.user = user;
@@ -63,11 +56,11 @@ public class User {
         this.endereco = endereco;
     }
     
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     
@@ -83,12 +76,13 @@ public class User {
             r = p.executeQuery();
             if(r.next()){
                 userFound = new User();
-                userFound.setId(r.getInt("idUser"));
+                userFound.setId(r.getString("idUser"));
                 userFound.setSenha(r.getString("pass"));
                 userFound.setEmail(r.getString("email"));
                 userFound.setUser(r.getString("user"));
                 userFound.setEndereco(r.getString("adress"));
             }
+             c.close();
         }catch(SQLException e){
             
         }
@@ -107,6 +101,7 @@ public class User {
             p.setString(3, newUser.getSenha());
             p.setString(4, newUser.getEndereco());
             p.executeUpdate();
+             c.close();
         }catch(SQLException e){
             
         }

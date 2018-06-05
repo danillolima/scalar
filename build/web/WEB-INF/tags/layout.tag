@@ -13,6 +13,10 @@
 <body>
     <header>
         <div class="logo"> <a href="/scalar"><img src="/scalar/img/logo.png"/></a></div>
+ <form method="get" action="/scalar/posts">
+                <input type="text" name="s" />
+                <input value="Buscar" type="submit" />
+        </form>
         <nav>
             <a href="/scalar">INICIO</a>
             <a href="/scalar/publicar">PUBLICAR</a>
@@ -28,7 +32,10 @@
                     out.print(" <a href=\"/scalar/cadastro\">CADASTRAR</a>");
                 }
             %>
+             
+            
         </nav>
+       
         <div>
             <label class="botao"></label>
         </div>      

@@ -41,11 +41,7 @@ public class PostController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");      
-        ArrayList<Post> indexUser;
-        indexUser = Post.getPosts(0, 10, request.getSession().getAttribute("idUser").toString());
-        request.setAttribute("posts", indexUser);
-        request.getRequestDispatcher("/profile.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,6 +56,20 @@ public class PostController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         if(request.getParameter("s") != null){
+            String busca = request.getParameter("s");
+            ArrayList<Post> resultado;
+            resultado = Post.buscaPosts(busca);
+            request.setAttribute("posts", resultado);
+            request.setAttribute("termo", busca);
+            request.getRequestDispatcher("WEB-INF/busca.jsp").forward(request, response);
+        }
+        else{
+            ArrayList<Post> indexUser;
+            indexUser = Post.getPosts(0, 10, request.getSession().getAttribute("idUser").toString());
+            request.setAttribute("posts", indexUser);
+            request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
+        }
         processRequest(request, response);
     }
 
@@ -80,7 +90,8 @@ public class PostController extends HttpServlet {
         File videoS, imgS, imgFolder, videoFolder;
         webImgPath = "/scalar/uploads/imagens/"; 
         webVideoPath = "/scalar/uploads/videos/";
-
+        
+        
         if(request.getParameter("action").equals("save")){            
             imgFolder = new File("C:\\Users\\Danillo Lima\\Documents\\NetBeansProjects\\scalar\\web\\uploads\\imagens");
             videoFolder  = new File("C:\\Users\\Danillo Lima\\Documents\\NetBeansProjects\\scalar\\web\\uploads\\videos");

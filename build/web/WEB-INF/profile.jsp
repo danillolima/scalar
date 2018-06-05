@@ -20,7 +20,9 @@
 %>
 </c:set>
 <t:layout title="${sessionScope.user} profile">
-    <div class="profile">
+   
+ <div class="profile">
+
     <h1> ${sessionScope.user} </h1>
     ${postsContent}
     </div>

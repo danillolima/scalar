@@ -1,8 +1,4 @@
-<%-- 
-    Document   : login
-    Created on : 15/05/2018, 16:54:37
-    Author     : Aluno
---%><%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <t:layout title="Cadastro - Scalar">
@@ -10,7 +6,6 @@
             <h1>Cadastro</h1>
             <form name="cadastro" action="/scalar/user?action=save" method="POST">
                 <ul>
-                    
                     ${message}
                     <c:remove var = "message"/>
                     <li><label>Usuário: <input type="text" name="user" size="10" /> </label></li>

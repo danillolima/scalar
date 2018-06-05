@@ -13,6 +13,10 @@
 <body>
     <header>
         <div class="logo"> <a href="/scalar"><img src="/scalar/img/logo.png"/></a></div>
+ <form method="get" action="/scalar/posts">
+                <input type="text" name="s" />
+                <input value="Buscar" type="submit" />
+        </form>
         <nav>
             <a href="/scalar">INICIO</a>
             <a href="/scalar/publicar">PUBLICAR</a>
@@ -20,15 +24,18 @@
                 HttpServletRequest r = (HttpServletRequest)request;
                 HttpSession sessionUser = r.getSession();
                 if(sessionUser.getAttribute("logado") != null){
-                    out.print(" <a href=\"/scalar/profile\">MEU PERFIL</a> ");
-                    out.print(" <a href=\"/scalar/user?action=1\">SAIR</a> ");
+                    out.print(" <a href=\"/scalar/posts\">MEU PERFIL</a> ");
+                    out.print(" <a href=\"/scalar/user?action=logout\">SAIR</a> ");
                 }
                 else{
                     out.print(" <a href=\"/scalar/login\">ENTRAR</a> ");
                     out.print(" <a href=\"/scalar/cadastro\">CADASTRAR</a>");
                 }
             %>
+             
+            
         </nav>
+       
         <div>
             <label class="botao"></label>
         </div>      

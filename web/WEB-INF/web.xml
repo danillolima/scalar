@@ -4,10 +4,18 @@
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
+     <servlet>
+             <servlet-name>index</servlet-name>
+             <jsp-file>WEB-INF/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+              <servlet-name>index</servlet-name>
+              <url-pattern>/</url-pattern>
+    </servlet-mapping>
     
     <servlet>
              <servlet-name>cadastro</servlet-name>
-             <jsp-file>cadastro.jsp</jsp-file>
+             <jsp-file>WEB-INF/cadastro.jsp</jsp-file>
     </servlet>
       
     <servlet-mapping>
@@ -17,7 +25,7 @@
     
        <servlet>
              <servlet-name>login</servlet-name>
-             <jsp-file>login.jsp</jsp-file>
+             <jsp-file>WEB-INF/login.jsp</jsp-file>
     </servlet>
       
     <servlet-mapping>
@@ -27,7 +35,7 @@
     
       <servlet>
              <servlet-name>profile</servlet-name>
-             <jsp-file>profile.jsp</jsp-file>
+             <jsp-file>WEB-INF/profile.jsp</jsp-file>
     </servlet>
       
     <servlet-mapping>
@@ -38,7 +46,7 @@
     
     <servlet>
              <servlet-name>publicar</servlet-name>
-             <jsp-file>publicar.jsp</jsp-file>
+             <jsp-file>WEB-INF/publicar.jsp</jsp-file>
     </servlet>
       
     <servlet-mapping>

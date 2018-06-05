@@ -29,5 +29,4 @@ public class ConMySQL {
         }
         return c;
     }
-    
 }

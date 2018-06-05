@@ -9,12 +9,14 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import libs.ConMySQL;
+import model.Post;
 import model.User;
 
 /**
@@ -61,6 +63,18 @@ public class UserController extends HttpServlet {
                 response.sendRedirect("login");
             }
         }
+        if(request.getParameter("show") != null){
+            String user = request.getParameter("show");
+            if(User.getUsuario(user) != null){
+              User profile = User.getUsuario(user);
+              ArrayList<Post> indexUser;
+              indexUser = Post.getPosts(0, 10, profile.getId());
+              request.setAttribute("user", profile);
+              request.setAttribute("posts", indexUser);
+              request.getRequestDispatcher("WEB-INF/showProfile.jsp").forward(request, response);
+            }
+        }
+        
         processRequest(request, response);
     }
 
@@ -74,7 +88,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+      
         
         
         if(request.getParameter("action").equals("save")){
@@ -139,6 +153,7 @@ public class UserController extends HttpServlet {
                 m = "Usuario ou senha estão incorretos.";
                 response.sendRedirect("/scalar/login");
             }
+            c.close();
         }catch(SQLException e){
            e.printStackTrace();
         }

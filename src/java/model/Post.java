@@ -17,7 +17,7 @@ import libs.ConMySQL;
 
 public class Post {
     
-     private int id;
+    private int id;
     private String title;
     private String publish_by;
     private String content;
@@ -111,9 +111,11 @@ public class Post {
             p.setString(4, newPost.getImg());
             p.setString(5, newPost.getPublish_by());
             p.executeUpdate();
+             c.close();
         }catch(SQLException e){
             
         }
+           
     }
     public static ArrayList<Post> getPosts(int indice, int qtd, String author){
         Connection c;
@@ -143,9 +145,39 @@ public class Post {
                 }
                 i++;
             }
+            c.close();
         }catch(SQLException e){
             
         }
         return postsFound;
     }
+    
+        public static ArrayList<Post> buscaPosts(String search){
+            Connection c;
+            c = ConMySQL.conecta();
+            PreparedStatement p;
+            ResultSet r;
+            ArrayList<Post> postsFound = new ArrayList<>();
+            try{
+                p = c.prepareStatement("select * from posts where title like '%?%' ");
+                p.setString(1, search);
+                p.setString(2, search);
+
+                r = p.executeQuery();
+     //int id, String title, String publish_by, String content, String img, String video, String hora) 
+                while(r.next()){
+                    postsFound.add( new Post( r.getInt("idPost"),
+                                                      r.getString("title"),
+                                                      r.getString("idUser"),
+                                                      r.getString("content"),
+                                                      r.getString("img"),
+                                                      r.getString("video"),
+                                                      r.getString("hora")));   
+                }
+                c.close();
+            }catch(SQLException e){
+
+            }
+            return postsFound;
+        }
 }
