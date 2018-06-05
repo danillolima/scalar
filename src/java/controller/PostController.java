@@ -130,13 +130,14 @@ public class PostController extends HttpServlet {
                 webVideoPath = null;
         }
         if(webVideoPath == null && webImgPath == null && content == null && title == null){
-            request.getRequestDispatcher("/publicar").forward(request, response);
-            
+            //request.getRequestDispatcher("WEB-INF/publicar.jsp").forward(request, response);
+            response.sendRedirect("publicar");
         }
         else
             Post.savePost(new Post(title, request.getSession().getAttribute("idUser").toString(), content, webImgPath, webVideoPath ));
         processRequest(request, response);
-        request.getRequestDispatcher("/posts").forward(request, response);
+        //request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
+        response.sendRedirect("posts");
     }
 
     /**
