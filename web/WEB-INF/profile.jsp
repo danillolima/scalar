@@ -21,8 +21,8 @@
 </c:set>
 <t:layout title="${sessionScope.user} profile">
    
- <div class="profile">
-    <script>
+<div class="profile">
+<script>
     function fetchdata(e){
         $.ajax({
             url: '/scalar/posts?feed=true',
@@ -35,7 +35,7 @@
                         var post = jsonData.posts[i];
                         
                         html += '<div class="post">';   
-                        html += '<input type="hidden" value="' + post.time + '"/>';   
+                        html += ' Postado  às:  <div class="timestamp">' + post.time + '</div>';   
                         
                         if(post.title !== 'null')
                             html += "<h2>"  + post.title + "</h2>";
@@ -49,27 +49,22 @@
                             $("#posts").append(html);
                         }
                         else{ 
-                            //var last = document.getElementByClass('timestamp');
-                          //  alert(last.children[1].innerHTML);
-                            	
-                          //  console.log($("#posts.timestamp").children().html());
-                            //$("#posts").prepend(html);
-                        }
+                            ultimo = new Date(document.getElementsByClassName("timestamp")[0].innerText);
+                            postAtual = new Date(post.time);
+                            if(ultimo < postAtual){
+                                $("#posts").prepend(html);
+                            }
                     }
-                   
                 }
-            
-        });
-    }
+         });
+     }
 
 $(document).ready(function(){
     fetchdata(true);
-  
-    setInterval(fetchdata, 80000, false);
-    $( "#posts div:nth-child(1)" ).append( "<span> - 2nd!</span>" );
+    setInterval(fetchdata, 8000, false);  
 });
      
-         </script>
+</script>
     <h1> ${sessionScope.user} </h1>
     <%-- ${postsContent} --%> 
     <div id="posts"></div>
