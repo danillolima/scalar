@@ -15,6 +15,9 @@ header{
 .logo{
     width: 45%;
 }
+.timestamp{
+    font-size: 12px;
+}
 
 header > nav > a, header > a{
     text-decoration: none;

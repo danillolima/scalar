@@ -22,9 +22,57 @@
 <t:layout title="${sessionScope.user} profile">
    
  <div class="profile">
+    <script>
+    function fetchdata(e){
+        $.ajax({
+            url: '/scalar/posts?feed=true',
+            type: 'GET',
+            success: function(response){
+                    var jsonData = JSON.parse(response);
+                    var html;
+                    for (var i = 0; i < jsonData.posts.length; i++) {
+                        var html = "";
+                        var post = jsonData.posts[i];
+                        
+                        html += '<div class="post">';   
+                        html += '<input type="hidden" value="' + post.time + '"/>';   
+                        
+                        if(post.title !== 'null')
+                            html += "<h2>"  + post.title + "</h2>";
+                        if(post.content !== 'null')
+                            html += '<p>'+ post.content +'</p>'; 
+                        if(post.video !== 'null' )
+                            html += '<video controls src="' + post.video + '"/></video>';
+                        if(post.img !== 'null')
+                            html +=  '<img src="' + post.img + '"/></div>';
+                        if(e === true){ 
+                            $("#posts").append(html);
+                        }
+                        else{ 
+                            //var last = document.getElementByClass('timestamp');
+                          //  alert(last.children[1].innerHTML);
+                            	
+                          //  console.log($("#posts.timestamp").children().html());
+                            //$("#posts").prepend(html);
+                        }
+                    }
+                   
+                }
+            
+        });
+    }
 
+$(document).ready(function(){
+    fetchdata(true);
+  
+    setInterval(fetchdata, 80000, false);
+    $( "#posts div:nth-child(1)" ).append( "<span> - 2nd!</span>" );
+});
+     
+         </script>
     <h1> ${sessionScope.user} </h1>
-    ${postsContent}
+    <%-- ${postsContent} --%> 
+    <div id="posts"></div>
     </div>
 </t:layout>
 

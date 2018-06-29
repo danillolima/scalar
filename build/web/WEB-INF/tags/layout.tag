@@ -8,6 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/scalar/css/site.css">
     <link rel="icon" href="/scalar/img/icon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+  
+    <script src="/scalar/js/site.js"></script>
+       
     <title>${title}</title>
 </head>
 <body>
